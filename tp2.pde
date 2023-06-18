@@ -3,17 +3,48 @@
 //pP
 
 PImage tri;
-
-
+int tam, cuenta;
+String pantalla;
+PFont tit,texto,normal;
 void setup (){
 size (800, 400);
 
 tri = loadImage ("tri.jpeg");
-
-
+tam=5;
+cuenta=0;
+pantalla="presentacion";
+tit = loadFont ("tit.vlw");
+texto = loadFont ("texto.vlw");
+normal = loadFont ("normal.vlw");
 }
+
+
 void draw (){
+
 background (0);
+   println (cuenta);
+if (cuenta==0 ){pantalla="presentacion";}
+if (cuenta>=3 ){pantalla= "arte";}
+
+if(pantalla.equals ("presentacion")){
+  background (0);
+  textAlign (CENTER);
+  textFont (tit);
+  text ("Op Art", width/2, 100);
+  fill (255, 0, 0);
+  textFont (texto, 25);
+  text ("interacciones", width/2, 150);
+   textFont (normal, 15);
+    fill (200, 30, 160);
+  text ("'r'\n\n'DELETE'\n\n'ENTER'", width/2, 200);
+  fill (200);
+  rect (200, 300, width/2, 80);
+  fill (250);
+  textFont (texto);
+  text ("comenzar", 400, 350);
+  }
+  
+  if(pantalla.equals ("arte")){
 image (tri, 0, 0, 400, 400);
 
 for (int arriba1= 400; arriba1<1000; arriba1 +=200){
@@ -38,7 +69,6 @@ inclina (0, 0, 200,200);
  }
  
  for (int arriba4= 400; arriba4<1000; arriba4 +=200){
-
  push();
  translate(arriba4, 300);
  rotate (radians (180));
@@ -48,32 +78,29 @@ inclina (0, 0, 200,200);
  
  
  image (tri, 0, 0, 400, 400);
- 
- 
-}
-void inclina (int posx, int posy, int ancho, int alto) {
-  push();
- translate(posx, posy);
-triangle(posx-ancho/2, posy+alto/2, 0, -alto/2, ancho/2, alto/2);
- pop(); 
-  for (int i=100; i>0; i-=5){
-    for (int j=0; j<5; j+=5){
-    strokeWeight (5);
-    if (i%2==0){
-      stroke (255);
-    }else{
-    stroke (0);
-  }
-  
- rotate (radians(-1));
-  triangle(posx-i, posy+i, 0-j, -i,+i, +i);
 
- }
+ 
 }
+}
+void keyPressed() {
+ if (key == ENTER) {
+ tam =1;
  }
- 
- 
- 
+ if (key == BACKSPACE) {
+ tam = 5;
+ }
+ if (key == 'r'){
+   cuenta=0;
+   }
+}
+
+
+void mousePressed(){
+if (cuenta== 0&&  mouseX>200 && mouseX<600 && mouseY>300 && mouseY<380){
+  cuenta =+3;
+  }
+}
+
  
 
 
